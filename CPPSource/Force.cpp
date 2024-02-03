@@ -4,21 +4,21 @@
 
 using namespace std;
 
-//Á¦µÄÕı½»·Ö½â(xÖá)
+//åŠ›çš„æ­£äº¤åˆ†è§£(xè½´)
 Force Force::ForceOrthogonalDecomposition_x(Force force)
 {
 	return Force(force.m_name, force.m_source, force.m_target,
 		force.m_magnitude_x,0);
 }
 
-//Á¦µÄÕı½»·Ö½â(yÖá)
+//åŠ›çš„æ­£äº¤åˆ†è§£(yè½´)
 Force Force::ForceOrthogonalDecomposition_y(Force force)
 {
 	return Force(force.Name(), force.m_source, force.m_target,
 		force.m_magnitude_y,90);
 }
 
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 Force::Force(string name, Object source, Object target, double magnitude,int angle):
 	m_name(name), m_source(source), m_target(target)
 {
@@ -27,7 +27,7 @@ Force::Force(string name, Object source, Object target, double magnitude,int ang
 		FORCES.push_back(*this);
 }
 
-//¹¹Ôìº¯Êı(ÄÚ²¿ÓÃ)
+//æ„é€ å‡½æ•°(å†…éƒ¨ç”¨)
 Force::Force(string name, Object source, Object target, double magnitude_x, double magnitude_y):
 	m_name(name), m_source(source), m_target(target)
 {
@@ -35,7 +35,7 @@ Force::Force(string name, Object source, Object target, double magnitude_x, doub
 	m_magnitude_y = magnitude_y;
 }
 
-//¿ÕÁ¦¹¹Ôìº¯Êı
+//ç©ºåŠ›æ„é€ å‡½æ•°
 Force::Force()
 {
 	string m_name="EMPTY";
@@ -46,7 +46,7 @@ Force::Force()
 	FORCES.push_back(*this);
 }
 
-//Îö¹¹º¯Êı
+//ææ„å‡½æ•°
 Force::~Force()
 {
 	string name;
@@ -59,7 +59,7 @@ Force::~Force()
 	}
 }
 
-//·´×÷ÓÃÁ¦
+//åä½œç”¨åŠ›
 Force Force::ReactionForce()
 {
 	if (m_source.Name() == "EMPTY")
@@ -69,44 +69,44 @@ Force Force::ReactionForce()
 	return Force("~" + m_name, m_target, m_source, -1*m_magnitude_x,-1*m_magnitude_y);
 }
 
-//Ó¦ÓÃ
+//åº”ç”¨
 void Force::Apply()
 {
 	m_source.Stress(*this);
 	m_target.Stressed(*this);
 }
 
-//»ñÈ¡Ãû³Æ
+//è·å–åç§°
 string Force::Name()
 {
 	return m_name;
 }
 
-//»ñÈ¡Ê©Á¦ÎïÌå
+//è·å–æ–½åŠ›ç‰©ä½“
 Object Force::Source()
 {
 	return m_source;
 }
 
-//»ñÈ¡ÊÜÁ¦ÎïÌå
+//è·å–å—åŠ›ç‰©ä½“
 Object Force::Target()
 {
 	return m_target;
 }
 
-//x·ÖÁ¿
+//xåˆ†é‡
 double Force::MagnitudeX()
 {
 	return m_magnitude_x;
 }
 
-//y·ÖÁ¿
+//yåˆ†é‡
 double Force::MagnitudeY()
 {
 	return m_magnitude_y;
 }
 
-//ÖØÔØ+,ºÏ³ÉÁ¦
+//é‡è½½+,åˆæˆåŠ›
 Force Force::operator+(Force force)
 {
 	Force force_x = ForceOrthogonalDecomposition_x(force);
