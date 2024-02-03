@@ -5,7 +5,7 @@
 using namespace std;
 
 
-//¼ÓËÙ¶ÈµÄÕı½»·Ö½â(xÖá)
+//åŠ é€Ÿåº¦çš„æ­£äº¤åˆ†è§£(xè½´)
 Acceleration Object::AccelerationOrthogonalDecomposition_x(Acceleration acceleration)
 {
 
@@ -13,21 +13,21 @@ Acceleration Object::AccelerationOrthogonalDecomposition_x(Acceleration accelera
 	return acceleration_x;
 }
 
-//¼ÓËÙ¶ÈµÄÕı½»·Ö½â(yÖá)
+//åŠ é€Ÿåº¦çš„æ­£äº¤åˆ†è§£(yè½´)
 Acceleration Object::AccelerationOrthogonalDecomposition_y(Acceleration acceleration)
 {
 	Acceleration acceleration_y = { acceleration.magnitude_y,90 };
 	return acceleration_y;
 }
 
-//ËÙ¶ÈµÄÕı½»·Ö½â(xÖá)
+//é€Ÿåº¦çš„æ­£äº¤åˆ†è§£(xè½´)
 Velocity Object::VelocityOrthogonalDecomposition_x(Velocity velocity)
 {
 	Velocity velocity_x = { velocity.magnitude_x,0 };
 	return velocity_x;
 }
 
-//ËÙ¶ÈµÄÕı½»·Ö½â(yÖá)
+//é€Ÿåº¦çš„æ­£äº¤åˆ†è§£(yè½´)
 Velocity Object::VelocityOrthogonalDecomposition_y(Velocity velocity)
 {
 
@@ -35,7 +35,7 @@ Velocity Object::VelocityOrthogonalDecomposition_y(Velocity velocity)
 	return velocity_y;
 }
 
-//Á¦µÄºÏ³É
+//åŠ›çš„åˆæˆ
 Force Object::ForceSynthesis()
 {
 	Force sum = EMPTYFORCE;
@@ -53,7 +53,7 @@ Force Object::ForceSynthesis()
 	return sum;
 }
 
-//¼ÓËÙ¶ÈµÄºÏ³É
+//åŠ é€Ÿåº¦çš„åˆæˆ
 Acceleration Object::AccelerationSynthesis()
 {
 	Force ResultantForce = ForceSynthesis();
@@ -61,20 +61,20 @@ Acceleration Object::AccelerationSynthesis()
 	return m_acceleration;
 }
 
-//ËÙ¶ÈµÄºÏ³É
+//é€Ÿåº¦çš„åˆæˆ
 //Velocity Object::VelocitySynthesis()
 //{
 //
 //}
 
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 Object::Object(string name, vector<Force> force_source, vector<Force> force_target, double mass, Acceleration acceleration, Velocity velocity, double x, double y) :
 	m_name(name), m_force_source(force_source), m_force_target(force_target), m_mass(mass), m_acceleration(acceleration), m_velocity(velocity), m_x(x), m_y(y)
 {
 	OBJECTS.push_back(*this);
 }
 
-//¿ÕÎïÌå¹¹Ôìº¯Êı
+//ç©ºç‰©ä½“æ„é€ å‡½æ•°
 Object::Object()
 {
 	string m_name = "EMPTY";
@@ -88,7 +88,7 @@ Object::Object()
 	OBJECTS.push_back(*this);
 }
 
-//Îö¹¹º¯Êı
+//ææ„å‡½æ•°
 Object::~Object()
 {
 	string name;
@@ -101,25 +101,25 @@ Object::~Object()
 	}
 }
 
-//»ñÈ¡Ãû³Æ
+//è·å–åç§°
 string Object::Name()
 {
 	return m_name;
 }
 
-//Ê©Á¦
+//æ–½åŠ›
 void Object::Stress(Force force)
 {
 	m_force_source.push_back(force);
 }
 
-//ÊÜÁ¦
+//å—åŠ›
 void Object::Stressed(Force force)
 {
 	m_force_target.push_back(force);
 }
 
-//Ë¢ĞÂ
+//åˆ·æ–°
 void Object::Update()
 {
 	AccelerationSynthesis();
